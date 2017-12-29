@@ -1,0 +1,1209 @@
+% Template for PLoS
+% Version 3.4 January 2017
+%
+% % % % % % % % % % % % % % % % % % % % % %
+%
+% -- IMPORTANT NOTE
+%
+% This template contains comments intended 
+% to minimize problems and delays during our production 
+% process. Please follow the template instructions
+% whenever possible.
+%
+% % % % % % % % % % % % % % % % % % % % % % % 
+%
+% Once your paper is accepted for publication, 
+% PLEASE REMOVE ALL TRACKED CHANGES in this file 
+% and leave only the final text of your manuscript. 
+% PLOS recommends the use of latexdiff to track changes during review, as this will help to maintain a clean tex file.
+% Visit https://www.ctan.org/pkg/latexdiff?lang=en for info or contact us at latex@plos.org.
+%
+%
+% There are no restrictions on package use within the LaTeX files except that 
+% no packages listed in the template may be deleted.
+%
+% Please do not include colors or graphics in the text.
+%
+% The manuscript LaTeX source should be contained within a single file (do not use \input, \externaldocument, or similar commands).
+%
+% % % % % % % % % % % % % % % % % % % % % % %
+%
+% -- FIGURES AND TABLES
+%
+% Please include tables/figure captions directly after the paragraph where they are first cited in the text.
+%
+% DO NOT INCLUDE GRAPHICS IN YOUR MANUSCRIPT
+% - Figures should be uploaded separately from your manuscript file. 
+% - Figures generated using LaTeX should be extracted and removed from the PDF before submission. 
+% - Figures containing multiple panels/subfigures must be combined into one image file before submission.
+% For figure citations, please use "Fig" instead of "Figure".
+% See http://journals.plos.org/plosone/s/figures for PLOS figure guidelines.
+%
+% Tables should be cell-based and may not contain:
+% - spacing/line breaks within cells to alter layout or alignment
+% - do not nest tabular environments (no tabular environments within tabular environments)
+% - no graphics or colored text (cell background color/shading OK)
+% See http://journals.plos.org/plosone/s/tables for table guidelines.
+%
+% For tables that exceed the width of the text column, use the adjustwidth environment as illustrated in the example table in text below.
+%
+% % % % % % % % % % % % % % % % % % % % % % % %
+%
+% -- EQUATIONS, MATH SYMBOLS, SUBSCRIPTS, AND SUPERSCRIPTS
+%
+% IMPORTANT
+% Below are a few tips to help format your equations and other special characters according to our specifications. For more tips to help reduce the possibility of formatting errors during conversion, please see our LaTeX guidelines at http://journals.plos.org/plosone/s/latex
+%
+% For inline equations, please be sure to include all portions of an equation in the math environment.  For example, x$^2$ is incorrect; this should be formatted as $x^2$ (or $\mathrm{x}^2$ if the romanized font is desired).
+%
+% Do not include text that is not math in the math environment. For example, CO2 should be written as CO\textsubscript{2} instead of CO$_2$.
+%
+% Please add line breaks to long display equations when possible in order to fit size of the column. 
+%
+% For inline equations, please do not include punctuation (commas, etc) within the math environment unless this is part of the equation.
+%
+% When adding superscript or subscripts outside of brackets/braces, please group using {}.  For example, change "[U(D,E,\gamma)]^2" to "{[U(D,E,\gamma)]}^2". 
+%
+% Do not use \cal for caligraphic font.  Instead, use \mathcal{}
+%
+% % % % % % % % % % % % % % % % % % % % % % % % 
+%
+% Please contact latex@plos.org with any questions.
+%
+% % % % % % % % % % % % % % % % % % % % % % % %
+
+\documentclass[10pt,letterpaper]{article}
+\usepackage[top=0.85in,left=2.75in,footskip=0.75in]{geometry}
+
+% amsmath and amssymb packages, useful for mathematical formulas and symbols
+\usepackage{amsmath,amssymb}
+
+% Use adjustwidth environment to exceed column width (see example table in text)
+\usepackage{changepage}
+
+% Use Unicode characters when possible
+\usepackage[utf8x]{inputenc}
+
+% textcomp package and marvosym package for additional characters
+\usepackage{textcomp,marvosym}
+
+% cite package, to clean up citations in the main text. Do not remove.
+\usepackage{cite}
+
+% Use nameref to cite supporting information files (see Supporting Information section for more info)
+\usepackage{nameref,hyperref}
+
+% line numbers
+\usepackage[right]{lineno}
+
+% ligatures disabled
+\usepackage{microtype}
+\DisableLigatures[f]{encoding = *, family = * }
+
+% color can be used to apply background shading to table cells only
+\usepackage[table]{xcolor}
+
+% array package and thick rules for tables
+\usepackage{array}
+
+% all of my packages in addtion to the ones for the Plos format
+\usepackage{Sweave}
+\usepackage{amsmath}
+\usepackage{amssymb} 
+\usepackage{makeidx} 
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{caption}
+\usepackage{array}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage[refpage]{nomencl}
+\renewcommand{\baselinestretch}{1.5} 
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{rotating}
+\usepackage{amsthm}
+\usepackage[toc,page]{appendix}
+\usetikzlibrary{arrows}
+\setkeys{Gin}{width=\textwidth}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{defn}{Definition}[section]
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+% create "+" rule type for thick vertical lines
+\newcolumntype{+}{!{\vrule width 2pt}}
+
+% create \thickcline for thick horizontal lines of variable length
+\newlength\savedwidth
+\newcommand\thickcline[1]{%
+  \noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
+  \cline{#1}%
+  \noalign{\vskip\arrayrulewidth}%
+  \noalign{\global\arrayrulewidth\savedwidth}%
+}
+
+% \thickhline command for thick horizontal lines that span the table
+\newcommand\thickhline{\noalign{\global\savedwidth\arrayrulewidth\global\arrayrulewidth 2pt}%
+\hline
+\noalign{\global\arrayrulewidth\savedwidth}}
+
+
+% Remove comment for double spacing
+%\usepackage{setspace} 
+%\doublespacing
+
+% Text layout
+\raggedright
+\setlength{\parindent}{0.5cm}
+\textwidth 5.25in 
+\textheight 8.75in
+
+% Bold the 'Figure #' in the caption and separate it from the title/caption with a period
+% Captions will be left justified
+\usepackage[aboveskip=1pt,labelfont=bf,labelsep=period,justification=raggedright,singlelinecheck=off]{caption}
+\renewcommand{\figurename}{Fig}
+
+% Use the PLoS provided BiBTeX style
+\bibliographystyle{plos2015}
+
+% Remove brackets from numbering in List of References
+\makeatletter
+\renewcommand{\@biblabel}[1]{\quad#1.}
+\makeatother
+
+% Leave date blank
+\date{}
+
+% Header and Footer with logo
+\usepackage{lastpage,fancyhdr,graphicx}
+\usepackage{epstopdf}
+\pagestyle{myheadings}
+\pagestyle{fancy}
+\fancyhf{}
+\setlength{\headheight}{27.023pt}
+\lhead{\includegraphics[width=2.0in]{PLOS-submission.eps}}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\footrule}{\hrule height 2pt \vspace{2mm}}
+\fancyheadoffset[L]{2.25in}
+\fancyfootoffset[L]{2.25in}
+\lfoot{\sf PLOS}
+
+
+\begin{document}
+\vspace*{0.2in}
+
+% Title must be 250 characters or less.
+\begin{flushleft}
+{\Large
+\textbf\newline{Statistical methods for testing carryover effects: A
+  mixed effects model approach} % Please use "sentence case" for title and headings (capitalize only the first word in a title (or heading), the first word in a subtitle (or subheading), and any proper nouns).
+}
+\newline
+% Insert author names, affiliations and corresponding author email (do not include titles, positions, or degrees).
+\\
+S. Gwynn Sturdevant\textsuperscript{1*},
+Thomas Lumley\textsuperscript{2},
+\\
+\bigskip
+\textbf{1} University of Massachusetts Amherst, School of Public Health
+  and Health Sciences, Department of Biostatistics and Epidemiology,
+  715 North Pleasant St, Amherst MA 01003
+\\
+\textbf{2} The Department of Statistics, The University of Auckland,
+    Private Bag 92019, Auckland 1142, New Zealand.
+\\
+\bigskip
+
+% Insert additional author notes using the symbols described below. Insert symbol callouts after author names as necessary.
+% 
+% Remove or comment out the author notes below if they aren't used.
+%
+% Primary Equal Contribution Note
+%\Yinyang These authors contributed equally to this work.
+
+% Additional Equal Contribution Note
+% Also use this double-dagger symbol for special authorship notes, such as senior authorship.
+%\ddag These authors also contributed equally to this work.
+
+% Current address notes
+%\textcurrency Current Address: Dept/Program/Center, Institution Name, City, State, Country % change symbol to "\textcurrency a" if more than one current address note
+% \textcurrency b Insert second current address 
+% \textcurrency c Insert third current address
+
+% Deceased author note
+%\dag Deceased
+
+% Group/Consortium Author Note
+%\textpilcrow Membership list can be found in the Acknowledgments section.
+
+% Use the asterisk to denote corresponding authorship and provide email address in note below.
+*nzgwynn@gmail.com
+
+\end{flushleft}
+% Please keep the abstract below 300 words
+\section*{Abstract}
+Carryover (the effects of treatment after it ceases) has been largely
+ignored in statistical literature except as a nuisance
+parameter. Recently, investigators began exploring carryover but with
+faulty methodology. In particular, when testing for carryover when the
+outcome is a diagnosis based on a noisy measurement crossing a
+threshold (such as in blood pressure), and diagnosis is followed by
+open-label treatment, a simple comparison of cumulative incidence
+rates is biased.  We show that modelling the noisy measurement itself
+using linear mixed effect models, then computing the expected proportion over
+the threshold, gives valid tests and consistent estimates.  The key
+insight is that the data made unavailable by open-label treatment
+after diagnosis are missing at random.  We demonstrate the analysis in
+simulations based on a large set of blood pressure measurements from a
+New Zealand healthcare organisation.
+
+\linenumbers
+
+% Use "Eq" instead of "Equation" for equation citations.
+\section*{Introduction}
+Rates of diabetes and hypertension are on the rise and responsible for
+increased death and disease \cite{HBPRisks}. With disease, 
+researchers want to investigate treatments that delay the onset; ``prevention
+is better than treatment'' \cite{Prevention}. Unfortunately,
+statistical methodoloy has not yet been developed that enables
+investigators to test this hypothesis. We use
+Stephen Senn's definition of carryover effects as the ``residual effects'' of
+treatment after it has ceased \cite{First25Years}. He also notes
+``that little has appeared ... on the subject of modelling for
+carry-over [sic] that is more grounded in clinical and pharmocological
+reality'' \cite{First25Years}. Recently, three studies have attempted
+to measure carryover effects of pharmacological treatments \cite{DASH,
+  MET, TROPHY1} but all used faulty methodology. For the purpose of
+concreteness we focus on one, the TROPHY trial.
+
+TROPHY randomised 809 participants to treatment with candesartan for
+2 years followed by 2 years of followup or control. Participants had
+blood pressure (BP) measurements taken every 3 months and were
+diagnosed with hypertension when 3 measurements were above the
+$140/90$ mm Hg threshold. Cumulative incidence in the treatment arm
+was 53.2\% and 63.0\% in the placebo arm. The investigators concluded
+that ``the effect of active treatment on delaying the onset of
+hypertension can extend up to 2 years after the discontinuation of
+treatment`` \cite{TROPHY1}.
+
+Three authors have criticised TROPHY's design. Meltzer (2006)
+criticised TROPHY's design as having an ``idiosyncratic primary
+endpoint [that] seriously impairs external applicability.''  Persell
+and Baker (2006) noted that cumulative diagnosis rates would differ
+even with identical underlying BP.  Futhermore, simulations suggest an
+80\% Type I error rate for the null hypothesis of no carryover in the
+underlying data \cite{Trophies-or-Dreams}. 
+
+In broad terms, the design error hinges on treatment lowering BP for
+the first two years. Since this occurs, measurements in excess of the
+threshold in this arm during this period are less likely. Defining
+hypertension as 3 measurements in excess results in lower diagnosis
+rates in the treatment arm regardless of carryover. A more thorough
+discussion of the faults in TROPHY and carryover effects can be found
+in Sturdevant and Lumley (2016) \cite{Sturdevant2016}.
+
+\subsection{Solutions}
+\label{Sec:Solns}
+We explored several methods: a simple design, a rerandomisation
+design, methodology similar to the Prostate Cancer Prevention Trial
+(PCPT), and analysing resultant data.
+
+Comparing cumulative incidences in a parallel or a crossover design is
+ineffective at testing a carryover hypothesis
+\cite{Sturdevant2016}. In the parallel design, noisy measurements
+combined with treatment result in diagnosis rates which are
+consistently lower in the treatment arm regardless of carryover. In
+the crossover design, a nominal trend results in more diagnoses in the
+second period which skews estimates. In addition, a three arm trial
+with both parallel, crossover and control arms are also ineffective.
+
+In a rerandomisation design, particpants are randomised to treatment
+or control at the beginning of the study, after the first period the
+remaining participants are rerandomised to treatment or control
+\cite{Nason2010}.  Applying this method to TROPHY would require
+investigators rerandomise remaining participants after treatment has
+ceased in the treatment arm, then analyse data. Nason suggests two
+methods for analysis: mixture models and the Maentel---Haenszel
+estimator.  Our data violates one assumption for the mixture model,
+that there is no ``period effect'' \cite{Nason2010}. In BP
+measurements, there is a non-negligible trend which results in more
+diagnosis in the second period \cite{Trophies-or-Dreams,
+  TROPHY-win-the-prize}; this also caused the crossover design to fail
+\cite{Sturdevant2016}. The second approach uses the Maentel---Haenszel
+estimator. This estimator compares risks of participants with the same
+treatment in the past period but different treatments in the current
+period \cite{MHEst}. Investigators would compare risks of participants
+who both had treatment in the first period, but are currently on
+treatment or control. Unfortunately, our question differs: for people
+with different treatments in the past period but the same (control)
+treatment in the current period, how does the risk differ?  It may be
+possible to modify the estimator to look at carryover, but it does not
+currently.
+
+The PCPT was designed to determine if treatment with finasteride was
+effective at preventing prostate cancer
+\cite{goodman2006prostate}. The investigators randomised 18,882 men to
+treatment or placebo for 7 years. Finasteride impacts upon PSA levels
+which increases rates of diagnosis in the treatment arm. The
+investigators addressed this in two ways: all participants were
+required to have biopsies at the end of the study, and the
+investigators used different thresholds of PSA levels in the two arms
+of the study to determine if a biopsy was necessary; high levels were
+sent to a statistical centre for analysis \cite{goodman2006prostate}.
+
+Although awkward, PCPT methodologies could be implemented as a
+solution.  Ambulatory BP (participants wear a cuff for an extended
+time which measures BP every 15 - 30 minutes) could be used a few
+years after the end of the trial to diagnose hypertension in all
+participants \cite{pickering2005recommendations}. A wash-out period is
+necessary to remove any carryover effects.
+
+Thresholds in the treatment and control arms could have been adjusted
+to allow similar diagnosis rates in both arms. An initial threshold in
+both arms of $140/90$ mm Hg could be used.  The first half of the
+trial would require more participants diagnosed in the treatment
+group, as their BP is artificially lowered. The second half requires
+more diagnosis in the control group. A further complication is
+variation in the impact of treatment on BP
+\cite{SDTreatmentEffect}. Diagnosing people with the highest BP with
+treatment may not equate to diagnosing people with the highest
+underlying BP.
+
+The rest of this article will discuss analysing resultant data.
+
+\subsection{Analysing data}
+\label{Sec:AnalysingData}
+This approach is also difficult due to missing data. After diagnosis
+participants are given open-label treatment which results in
+subsequent BP measurements being lowered due to an
+intervention. Because these measurements are lowered, it is impossible
+to determine if the effect of the initial treatment is extenuated. As
+data after diagnosis is missing, estimating carryover parameters using
+a linear model results in biased estimates. However, all data
+subsequent to diagnosis is missing deterministically based upon
+previous measurements. As missing data is based on previous
+measurements, the missing data is \textit{missing at random} and a
+linear mixed model should give unbiased estimates of carryover
+parameters.
+
+Mathematically, to discuss diagnosis times we define $D_i$ to be the
+time person $i$ is diagnosed as hypertensive. We let $Y_{it_j}$ be the
+systolic BP of person $i$ at time $t_j$ and $\widetilde Y_{it_j}$ be
+the systolic BP of person $i$ at time $t_j$ under randomisation;
+$Y_{it_j} = \widetilde Y_{it_j}$ prior to diagnosis. To discuss how
+data relate to diagnosis we use rule $f_{t_j}$ laid out in trial
+protocol that defines when person $i$ is diagnosed as hypertensive
+using $Y_{it_j}$. We have that $Y_{it_j} = \widetilde Y_{it_j}$ for
+all $t_j \leq D_i$ (until diagnosis occurs). After $D_i$ they differ
+due to $f_{t_j}$: if person $i$ is in the control group after
+diagnosis they will receive treatment per trial protocol, if not they
+will receive new treatment or more treatment after diagnosis.
+$f_{t_j}$ results in measurements $Y_{it_j, t_j>D_i}$ not adhering to
+Eq \eqref{eq:MixEffM1}. The $D_i$ can be seen as a stopping
+point for the stochastic process.
+
+We model
+\begin{equation}
+\label{eq:MixEffM1}
+Y_{it_j}= a_i +\beta t_{it_j} +
+\gamma X_{it_j}+ \delta Z_{it_j} + \epsilon_{it_j} 
+\end{equation} where $Y_{it_j}$ is the sytolic BP measurement,
+$a_i$ estimates the intercept for person $i$, $\beta$ is the average trend, $\gamma$ is
+the average treatment effect, $\delta$ is the average carryover,
+$X_{it_j}$ is 1 if person $i$ is on treatment at time $t_j$ and 0
+otherwise, and $Z_{it_j}$ is 1 at the beginning of period 2,
+when treatment ceases, and decreases linearly to 0 over the predefined carryover
+period. Unfortunately, we can not access all $Y_{it_j}$ as
+diagnosis occurs and subsequent data is missing due to ensuing
+treatment beginning when $f_{t_j}=1$. To estimate parameters we analyse
+$\widetilde Y_{it_j}$ where data is available only until diagnosis. The
+unavailability of all $Y_{it_j}$ results in biased parameter estimates if analysis
+is based on a linear model. 
+
+As our missing data is due to diagnosis based upon past measurements,
+and none of the parameters have any impact upon diagnosis, our data is
+missing at random \cite{Rubin1976}. We formalise in Theorem
+\ref{Thm:MAR}.
+
+\begin{definition}
+  $D_i = d$ if $f_d =1$ and $f_{t_j} = 0$ for all $t_j < d$.
+\end{definition}
+
+\begin{theorem}
+\label{Thm:MAR}
+If we set $Y_{it_j}$ to missing for $t_j > D_i$ it is missing at random. 
+\end{theorem}
+
+\begin{proof}
+  Diagnosing person $i$ is based on $Y_{it_j}$ in a deterministic
+  manner defined by $f_{t_j}$. $D_i = d$ is completely determined by
+  $Y_{it_j, t_j\leq D_i}$ and therefore is independent of $Y_{it_j,
+    t_j>D_i}$ conditional on $Y_{it_j, t_j\leq D_i}$. If $Y_{it_j,
+    t_j>D_i}$ are treated as missing, they are missing at random.
+\end{proof}
+
+If we reduced $Y_{it_j}$ to binary $A_{it_j} = \begin{cases} 1 & \mbox
+  Y_{it_j} \geq 140 \\ 0 & \mbox Y_{it_j} < 140 \end{cases}$
+subsequent deleted data would be missing at random if $f_{t_j}$
+defined hypertension by counting the number of measurements above the
+threshold. It would not be missing at random if $f_{t_j}$ diagnosed
+hypertension by averaging measurements as the likelihood ceases to
+factor into independent products with only one containing
+parameters. For the rest of this article we refer to $Y_{it_j, t_j
+  \leq D_i}$ as $Y_{it_j}$.
+
+Without averaging measurements, the likelihood of the parameters
+factors into the data distribution and a function of the parameters
+for the probability of missingness. These two sets of parameters
+differ and are independent. The restricted maximum likelihood of the parameters is
+dependent on only the likelihood for the parameters; the probability
+of missingness is irrelevant.  This likelihood for person $i$ is:
+\begin{gather*} {l_i} = \sum_{j = 1}^M \left( \frac{-1}{2}\log|\Sigma| -
+    \frac{1}{2} (Y_{it_j} - (a_i +\beta t_{it_j} + \gamma X_{it_j}+ \delta
+    Z_{it_j}))\right. \\ \left. |\Sigma| (Y_{it_j} - (a_i +\beta t_{it_j}
+    + \gamma X_{it_j}+ \delta Z_{it_j})) \vphantom{\frac{-1}{2}}\right)
+  \label{eq:L}
+\end{gather*}
+with measurement times $t_j = t_1, t_2, \ldots , t_M$.  The likelihood
+for the whole data set is $L = \sum_{i=1}^N l_i$ where there are $i =
+1,2, \ldots ,N$ participants.
+
+We found the restricted maximum likelihood (REML) estimates by
+maximising $\int L d\mathbf{\theta}$ where $\mathbf{\theta} = (\alpha,
+\beta, \gamma, \delta)^T$. This gave consistent estimates
+
+\begin{gather*}
+\left(
+     \begin{array}{c}
+       a_i\\
+       b_i\\
+       c_i\\
+       d_i
+     \end{array}\right) \text{of}   
+     \left(
+     \begin{array}{c}
+       \alpha\\
+       \beta\\
+       \gamma\\
+       \delta
+     \end{array} \right)
+   \text{with distribution N}
+   \left[ \left(
+     \begin{array}{c}
+       \alpha\\
+       \beta\\
+       \gamma\\
+       \delta
+     \end{array} \right),
+   \Sigma
+ \right]
+ \end{gather*} 
+  where $\Sigma$ is an unconstrained covariance matrix not
+ assumed to be diagonal. We optimised the likelihood using the
+ \texttt{lmer} function from the \texttt{lme4} package in \texttt{R}. 
+  
+ To find the true relative risk of hypertension from the mixed model,
+ Eq \ref{eq:MixEffM1}, we simulated $10^4$ participants with no
+ measurement error ($ \epsilon_{it_j} = 0$). With this data, we paired
+ treatment and control arms to compute the relative risk of
+ hypertension. When no carryover was in the model, at the first time
+ point after treatment ceased, the relative risks were centred around
+ 1. Relative risks centred on 1 suggests that diagnosis of
+ hypertension is equiprobable in the two arms: because there is no
+ carryover, the effects of treatment cease immediately, with no
+ residual benefits of treatment, diagnosis rates in the two arms should
+ be similar. To test for carryover we simulated data; removed data
+ subsequent to diagnosis; fit a mixed model using \texttt{lmer};
+ conducted a parameteric bootstrap of the relative risk for the
+ measurement time after treatment ceased using \texttt{bootMer};
+ checked to see if 1 is in the confidence interval; if it was, based
+ upon our simulations there is a $99\%$ probability that no carryover
+ was in the model used to simulate the data. The details follow.
+
+\subsection{Exploring the correlation structure}
+\label{Sec:CorrStr}
+Assumptions for a linear mixed model are: random effects in the data,
+normality of random effects, errors are normal $\epsilon_{it_j} \sim
+N(\mu = 0, \sigma^2 = \sigma^2)$, and uncorrelated errors
+\cite{verbeke2000linear}. The first two assumptions show that when
+using linear mixed models, correct specification of the random effects
+is important. To ensure a random effects model was realistic, we
+analysed a large dataset of longitudinal BP.
+
+Repeated BP measurements were found in the chronic care management
+programme in Counties Manukau. Counties Manukau has high Pacific
+Islander and M\=aori population; 34\% of the population lives in
+``very deprived'' conditions. The District Health Board analysed
+increasing rates of acute adult medical admissions and found that they
+could be reduced by up to 30\% ``with more timely primary care
+intervention.''  The aim of the study was ``to develop an effective
+and efficient process for the seamless delivery of care for targeted
+patients with specific chronic diseases.'' One of the critical
+objectives was ``to achieve best-practice management of ... blood
+pressure control'' \cite{AboutTheData}. We obtained $103,098$ repeated
+BP measurements from $9,043$ people from the chronic care management
+programme in Counties Manukau \cite{AboutTheData}.
+
+Our purpose was to explore the correlation structure of BP for people
+who were prehypertensive.  To have data that reflected this population, we
+deleted rows with missing systolic measurements or systolic
+measurements below 50 mm Hg or above 160 mm Hg. The elevated upper
+bound of 160 mm Hg was due to the uncertainty in measurement; systolic
+BP can vary up to 20 mm Hg in any given day \cite{Muntner160}. We
+deleted diastolic measurements less than 30 mm Hg which were likely
+the result of a recording error.  Participants with only 1 measurement
+were also deleted.
+
+\subsection{Normality}
+Fig \ref{Fig:QQPlots} demonstrates a well-documented phenomenon:
+terminal digit preference in BP measurements. Research indicates the
+terminal digit is $0$ in $45\%$ of systolic BP measurements and $48\%$
+of diastolic BP. Even numbers are more likely to occur than odd, with
+the most common odd digit being 5 \cite{DigitPref}. Besides terminal
+digit preference the quantiles of the data appear to follow a normal
+distribution.
+
+\begin{figure}
+\begin{center}
+<<QQPlots, echo=false, fig=false, include=false>>=
+load("Norm.of.SMSTS.rda")
+load("Norm.of.DMSTS.rda")
+  
+## The graphs in the layout below will all have margins of 0 cm.
+opar = par(mar = rep(0,4))
+## Our layout will have 3 rows and 3 columns of graphs (1-9), with titles at the top of the 3 columns (10 - 12).  Graph 13 is the main title of the graph.    
+layout (matrix(c(0, 3, 4, 0,
+                 0, 1, 2, 0,
+                 0, rep(0,2),0),
+               nc = 4, byrow = TRUE),
+          ## The widths and heights are defined below, there is a margin on the left and right, and the main title (13) is twice the height of the column titles (10 - 12) 
+        widths = c(lcm(1), 1, 1, lcm(1)),
+        heights = c(lcm(2), 1, lcm(1)))
+  
+library(RColorBrewer) 
+palette(brewer.pal(3, "RdGy"))
+    
+qqnorm(Norm.of.SMSTS, ann = FALSE, xaxt = "n", yaxt = "n", frame = FALSE)
+box(col = "lightgrey")
+axis(2, col = "grey50",  at=c(60,80,100,120,140,160), labels=c("60","80","100","120","140","160"))
+axis(1, col = "grey50",  at=c(-4,-2,0,2,4), labels=c("-4","-2","0","2","4"))
+
+qqnorm(Norm.of.DMSTS, ann = FALSE, xaxt = "n", yaxt = "n", frame = FALSE)
+box(col = "lightgrey")
+axis(4, col = "grey50",  at=c(40,60,80,100,120,140,160), labels=c("40","60","80","100","120","140","160"))
+axis(1, col = "grey50",  at=c(-4,-2,0,2,4), labels=c("-4","-2","0","2","4"))
+
+plot.new()
+plot.window(xlim = c(0,1), ylim = c(0,1))
+text(.5, .25, "Q-Q Plot of Systolic BP", font = 2, cex = 1.5)
+
+plot.new()
+plot.window(xlim = c(0,1), ylim = c(0,1))
+text(.5, .25, "Q-Q Plot of Diastolic BP", font = 2, cex = 1.5)
+@
+\includegraphics[width = 150mm,keepaspectratio]{Thesis-QQPlots.pdf}
+\caption{Q-Q Plots for both systolic and diastolic blood
+  pressures. Besides terminal digit preference, there is not evidence
+  against normality.}
+\label{Fig:QQPlots}
+\end{center}
+\end{figure}
+
+\subsection{Correlation structure}
+\label{Sec:CorrStruct}
+We used a variogram to determine how time impacted upon systolic
+BP. For each person, we found all combinations of measurement times
+and the corresponding BP measurements. We computed $y_{i,jk} =
+\frac{1}{2} (BP_{it_{j}} - BP_{it_{k}})^2$ and $x_{i,jk} = t_{ij} -
+t_{ik}$ where $t_{ij}$ and $BP_{it_{j}}$ refer to time of measurement
+and BP measurement, respectively, for person $i$ at time $t_{j}$.  For
+the first 4 years, we partitioned them into $90$ day intervals, after 4 years, we
+increased the interval lengths to $180$ days for smoothness; 4 years
+is also the duration of our study. Fig \ref{gr:MeanVariogram} shows
+the mean of each partition.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width = 150mm,keepaspectratio]{Means.pdf}
+\caption{The relative flatness of the variogram shows no
+  autocorrelation. The red line indicates a 4 year lag, which is the
+  length of our study.}
+\label{gr:MeanVariogram}
+\end{center}
+\end{figure}
+
+The stability of Fig \ref{gr:MeanVariogram} suggests no evidence of
+autocorrelation in this data. Fluctuations are likely due to variation
+among the data.
+
+\subsection{Random effects}
+We also used these data to identify if fixed or random effects in the
+gradient most accurately represented the measurements within
+people. We separated the data into participants above and below age
+$50$ and randomly drew $10,000$ samples of size $400$ from both
+subpopulations. We fit 2 mixed effect models to both systolic and
+diastolic BP to all $20,000$ samples. One model was $Y_{it_j}= a_i
++\beta t_{it_j} + \epsilon_{it_j}$, the other $Y_{it_j}= a_i
++b_it_{it_j} + \epsilon_{it_j}$; the first model has a fixed trend,
+the second a random trend. We fit fixed and random trend effects for
+systolic and diastolic BP to the $23,786$ measurements for people less
+than age 50, and the $79,312$ above to find the population trend. The
+percent of confidence intervals for $\beta$ and $b_i$ which contained
+the population trend are found in Table \ref{Tab.Corr}. A random effect
+model is more likely to contain the true trend in its confidence
+interval, so was used for both trend and treatment effect in our third set
+of simulations.
+
+\begin{table}
+  \caption{Summary of fixed and random effects trends for systolic and
+    diastolic blood pressures. Random effects represent the data better.}
+\begin{tabular}{ l c c c c}
+  & \multicolumn{2}{ c }{Less than 50} & \multicolumn{2}{ c }{More than 50} \\
+  & Systolic & Diastolic & Systolic & Diastolic \\
+  Fixed trend & 70\% & 85\%  & 64\% & 72\%\\
+  Random trend & 97\% & 97\%  & 92\% & 96\%\\
+  \label{Tab.Corr}
+\end{tabular}
+\end{table}
+
+
+\section{Methods}
+\label{Sec:LMMMethods}
+We conducted three systematic simulation studies as outlined in Fig
+\ref{SchematicSims}. The first set demonstrated that restricted
+maximum likelihood gave unbiased estimates of the carryover parameter
+using the \texttt{lmer} function in \texttt{R} \cite{LMERCite1,
+  LMERCite2}. The second set demonstrated the same using both systolic
+and diastolic BP. The third involved using the \texttt{bootMer} to
+find confidence intervals for the relative risk.
+
+\begin{figure}[htp]
+  \begin{center}
+    \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,
+      thick,mybox/.style={draw, text width=8cm}]
+
+      \node[mybox] (A) {Primary Simulations: Mixed Effect Model -
+        Random Intercept; Systolic BP only};
+
+      \node[mybox] (B) [below of=A, node distance=5cm] {Secondary
+        Simulations: Mixed Effect Model - Random Intercept; Both
+        systolic and diastolic BP};
+
+      \node[mybox] (C) [below of=B, node distance=5cm] {Tertiary
+        Simulations: Mixed Effect Model - Random intercept, gradient,
+        and treatment effects; Systolic BP only; Bootstrap to generate
+        confidence intervals of relative risks};
+
+      \draw[->] (A)--(B); \draw[->] (B)--(C);
+    \end{tikzpicture}
+  \end{center}
+  \captionof{figure}{Schematic overview of simulations for this research. Adapted from
+    \cite{SDTreatmentEffect}}
+  \label{SchematicSims}
+\end{figure}
+
+
+Our first simulations began by randomly generating a number from a
+uniform distribution between 125 -- 140 mm Hg; TROPHY trial
+participants had systolic BP close to the $140$ mm Hg threshold
+\cite{TROPHY1}. Trends of 0, 1, and 2 mm Hg per year were used as
+systolic BP increases over time \cite{Trend-in-Hyp-1,
+  Trend-in-Hyp-2}. The treatment arm was given treatments of either
+$-$5 mm Hg or $-10$ mm Hg for either 1, 1.5, 2, 2.5, or 3 years
+\cite{Trophies-or-Dreams}. Measurements were taken every 3 months, 6
+months, or yearly, and carryovers of length 0, 0.5, 1, 1.5, and 2
+years were included. BP varies due to both measurement error and
+intra-individual variability which we combined and assumed normally
+distributed standard deviations of 3, 5, and 7 mm Hg
+\cite{Trophies-or-Dreams, TROPHY-win-the-prize}. We analysed the data
+by fitting a model similar to Eq \ref{eq:MixEffM1} using both \texttt{lm}
+and \texttt{lmer} in \texttt{R}; \texttt{lm} fits a linear model,
+while \texttt{lmer} fits a mixed effect model with random and fixed effects
+outlined in Fig \ref{SchematicSims}.
+
+The second set of simulations involved both systolic and diastolic
+measurements. A description of the systolic BP simulation is
+above. Baseline diastolic BP was randomly generated between 80 -- 90
+mm Hg and a quadratic effect with age meant trends of -1, 0, and 1 mm
+Hg per year were used \cite{DiaCite}.  All combinations of systolic
+and diastolic trends were used in the simulation.  To reflect
+day-to-day variation and measurement error, we added
+normally-distributed random error with standard deviation 3, 5, and 7
+mm Hg for systolic BP which corresponded to 2, 3, and 4 mm Hg for
+diastolic BP \cite{DiaCite}.  Active treatment was assumed to lower
+systolic pressure by 5 or 10 mm Hg which corresponded to diastolic
+decreasing by 3 and 6 mm Hg, respectively \cite{DiaCite}. We used the
+same lengths of study, durations of treatments, and carryover lengths
+as our first set.
+
+We fit the mixed effects model $Y_{ikt_j} = a_{ik} +\beta_{k}
+t_{it_j} + \gamma_{k} X_{it_j} + \delta_{k} Z_{it_j} + \epsilon_{ikt_j}$
+using \texttt{lm} and \texttt{lmer} in R. Here, $Y_{ikt_j}$ is
+systolic BP when $k$ is 1, and diastolic BP otherwise. The \texttt{lm}
+estimates used a sum of squares maximisation, while \texttt{lmer} used
+restricted maximum likelihood \cite{LMERCite1, LMERCite2}.
+
+In the third set of simulations we generated data using random effects
+for both treatment effect and trend. We generated baseline systolic
+measurements as above. Our simulated trend for each person was sampled
+from a random normal distribution with mean $0,1$ or $2$ mm Hg per
+year and standard deviation $1.5$ mm Hg, which our data
+indicated. Random treatment effects were found by sampling from a
+normal distribution with mean $-5,-10$ or $0$ mm Hg and standard
+deviation $2.5$ mg Hg \cite{SDTreatmentEffect}. We fit a mixed effects
+model with random effects for intercept, trend, and treatment effects
+\begin{align}
+Y_{it_j}=a_i +b_i t_{it_j} + c_i X_{it_j}+ \delta Z_{it_j} + \epsilon_{it_j}.
+\label{eq:3rdSim}
+\end{align}
+We used the measurement schedules and lengths of carryover outlined above.
+
+For each combination of parameters we simulated 400 trials, fit a
+mixed effects model using \texttt{lmer}, and used the \texttt{bootMer}
+function to simulate 100 parametric bootstraps of the relative risk
+\cite{LMERCite1, LMERCite2}. A schematic of these simulations can be
+found in Fig \ref{SchematicBoot}.
+
+In a parametric bootstrap we assume a distribution based on the
+estimates obtained from fitting a model to the data, then sample from
+this distribution \cite{Bootstrap}.  In our case, we fit a mixed
+effects model and sampled from the model to find bootstrap estimates
+of the relative risk.
+
+All three sets of simulations diagnosed hypertension using these
+rules: if two consecutive measurements were above, if three
+measurements were above, if the average of two consecutive
+measurements were above, and if the average of three consecutive
+measurements were above. The thresholds used were 140 mm Hg (systolic)
+and 90 mm Hg (diastolic). We deleted systolic and diastolic data after
+diagnosis.
+
+ \section{Results and discussion}
+ \label{sec:LMMResults}
+
+ \subsection{Primary simulation results}
+ \label{Sec:lmerWorks}
+ Our first simulation demonstrated that the \texttt{lmer} function in
+ \texttt{R} gave negligibly biased estimates for the carryover
+ parameter.  Fig \ref{gr:lmerWorks} shows bias in estimates for
+ carryover found using the linear model and the mixed effects model fit to
+ $100$ simulated trials. The relevant parameters are: treatment effect
+ $-10$ mm Hg, carryover $2$ years, and diagnosis defined by $3$
+ measurements above the $140$ mm Hg threshold.  The horizontal axis
+ separates lengths of treatment $1, 1.5, 2, 2.5,$ or $3$ years and the
+ bottom two graphs have standard deviation $3$ mm Hg, the top $7$ mm
+ Hg.  Trials with standard deviation $5$ mm Hg were also simulated
+ with results similar to those in Fig \ref{gr:lmerWorks}.
+
+ The baseline BP for the simulated data came from a uniform
+ distribution as described in Sec \ref{Sec:LMMMethods} but our
+ model assumed a normal distribution for baseline BP. As we can see
+ from Fig \ref{gr:lmerWorks} our model appears to be robust to the
+ normality assumption at baseline.
+
+\begin{figure}
+\begin{center}
+<<ModelBias, echo=false, fig=false, include=false>>=
+load("/Users/nzgwynn/LinearMixedModel/CheckMEst.rda")
+load("/Users/nzgwynn/LinearMixedModel/True.Vals.rda")
+
+# We want 4 graphs for each combination of treatment, carryover, and rule. We want both LMer and LM estimates of treatment effect (x) and carryover (z).  We will index through ParForGraphs, so that we do not need to copy the coding 200 times.
+ParForGraphs = expand.grid(
+  list(treatment = c("-10"),
+       carryover = c("2"),
+       rule = c("rule3over")),
+  stringsAsFactors = FALSE)
+
+# These are used in the loops below to make 1 graph.  The graphs are organised so that treatment length is on the x axis, standard deviation is in the rows, and columns indicate frequency of measurements.
+error.sd = c("7", "3")
+times = c("0.25")
+end.of.treatment = c("1", "1.5", "2", "2.5", "3")
+xaxis.labels = end.of.treatment
+ylims = c(-1.5,1.75)
+
+# These will be used to make the titles for the 200 graphs
+Main.Title = c("3 Over")
+
+# Binding Main.Title to ParForGraphs - this will be used to construct titles below.
+ParForGraphs = cbind(ParForGraphs, Main.Title)
+
+# A quarter of the number of graphs we want to make, is the number of rows we will need to locate. We will use 4 different columns from the same rows, subtract off the true values and graph the resulting bias'. 
+no.of.rows = nrow(ParForGraphs)
+
+# Finding the correct rows
+for (l in 1:no.of.rows){
+  # There are 4 columns which are of interest: treatment effect using lmer, treatmemt effect using lm, carryover using lmer, and carryover using lm.
+  cols = c("z.lmer", "z.lm")
+  
+  ## The graphs in the layout below will all have margins of 0 cm.
+  opar = par(mar = rep(0,4))
+  ## Our layout will have 3 rows and 3 columns of graphs (1-9), with titles at the top of the 3 columns (10 - 12).  Graph 13 is the main title of the graph.    
+  layout (matrix(c(0, rep(7,2), 0,
+                   0, 5, 6, 0,
+                   0, 1, 3, 0,
+                   0, 2, 4, 0,
+                   0, rep(0,2),0),
+                 nc = 4, byrow = TRUE),
+          ## The widths and heights are defined below, there is a margin on the left and right, and the main title (13) is twice the height of the column titles (10 - 12) 
+          widths = c(lcm(1), 1, 1, lcm(1)),
+          heights = c(lcm(2), lcm(1), 1, 1, lcm(1)))
+  
+  library(RColorBrewer) 
+  palette(brewer.pal(3, "RdGy"))
+    
+  ## layout.show(9)
+  
+  for(k in 1: length(cols)){
+    
+    if(k == 1) {colour = 3}else{colour = 2}
+  
+    # i is the row number for the graphs
+    for(i in 1: length(error.sd)){
+      rows = which(CheckMEst[,"treatment",1] == ParForGraphs[l, "treatment"]  &
+        CheckMEst[,"rule",1] == ParForGraphs[l, "rule"] &
+        CheckMEst[,"carryover",1] == ParForGraphs[l, "carryover"] &
+        CheckMEst[,"error.sd",1] == error.sd[i] &
+        CheckMEst[,"times",1] == times)
+      
+      rows.True = which(True.Vals[,"treatment",1] ==
+        ParForGraphs[l, "treatment"] &
+        True.Vals[,"rule",1] == ParForGraphs[l, "rule"] &
+        True.Vals[,"carryover",1] == ParForGraphs[l, "carryover"] &
+        True.Vals[,"carryover.vary",1] == ParForGraphs[l, "carryover"] &
+        True.Vals[,"times",1] == times)
+      
+      boxplot(as.numeric(CheckMEst[rows[1],cols[k],]) -
+              as.numeric(True.Vals[rows.True, "z.lm",]),
+              as.numeric(CheckMEst[rows[2],cols[k],]) -
+              as.numeric(True.Vals[rows.True, "z.lm",]),
+              as.numeric(CheckMEst[rows[3],cols[k],]) -
+              as.numeric(True.Vals[rows.True, "z.lm",]),
+              as.numeric(CheckMEst[rows[4],cols[k],]) -
+              as.numeric(True.Vals[rows.True, "z.lm",]),
+              as.numeric(CheckMEst[rows[5],cols[k],]) -
+              as.numeric(True.Vals[rows.True, "z.lm",]),
+              ann = FALSE, xaxt = "n", yaxt = "n",
+              border = "grey30", frame = FALSE,
+              notch = TRUE, ylim = ylims, col = colour)
+      ## Including a horizontal line where bias is 0
+      abline(h = 0, col = 1, lwd = 2)
+      box(col = "lightgrey")
+
+      ## Labelling y axis
+      if(k == 1 && i%%2 == 1)
+        axis(2, col = "grey50",  at=c(-1,0,1),
+             labels=c("-1","0","1"))
+
+      ## Labelling y axis
+      if(k == 2 && i%%2 == 0)
+        axis(4, col = "grey50",  at=c(-1,0,1),
+             labels=c("-1","0","1"))
+
+      ## Inserting label on the top row of graphs
+      if(k == 2 && i == 1)
+        mtext("standard deviation 7", 4, col = "grey50", cex = 2/3 )
+
+      ## Inserting label on the bottom row of graphs
+      if(i == 2 && k == 1)
+        mtext("standard deviation 3", 2, col = "grey50", cex = 2/3 )
+
+      ## Inserting x axis labels
+      if (i == 2 && k == 2)
+        axis(1,at=1:length(xaxis.labels), lab=xaxis.labels, col="grey50")
+ 
+    }
+    ## Closing off the loop for number of error.sd [i]
+  }
+  ## Closing off the loop for length cols [k]
+
+    
+    # Inserting the title for column 1 above.
+    plot.new()
+    # The xlim and ylim will allow the centreing of the text both horizontally and vertically below in the the text command.
+    plot.window(xlim = c(0,1), ylim = c(0,1))
+    text(.5, .25, "Linear Mixed Model", font = 2)
+
+    # Inserting the title for column 2 above.
+    plot.new()
+    # The xlim and ylim will allow the centreing of the text both horizontally and vertic  ally below in the the text command.
+    plot.window(xlim = c(0,1), ylim = c(0,1))
+    text(.5, .25, "Linear Model", font = 2)
+
+    # Inserting the main title computed above in the graph number 13
+    plot.new()
+    # The xlim and ylim will allow the centreing of the text both horizontally and vertically below in the the text command.
+    plot.window(xlim = c(0,1), ylim = c(0,1))
+    text(.5, .25, paste("Bias in Estimates"),
+         font = 2, cex = 1.5)
+  
+}
+@
+\includegraphics[width = 150mm,keepaspectratio]{Thesis-ModelBias.pdf}
+\end{center}
+\caption{Boxplots of mean bias in estimates of carryover parameter for
+  the mixed effects model (left panel) and the linear model (right
+  panel) from our primary simuations. Bias in the mixed effects model
+  is consistently smaller.}
+\label{gr:lmerWorks}
+\end{figure}
+
+\subsection{Bivariate simulation}
+Fig \ref{gr:BivBias} shows the mean biases in our estimates of the
+carryover parameter from all $7016$ combinations of parameters
+discussed in Sec \ref{Sec:LMMMethods}. For each set of parameters,
+we conducted 100 bivariate simulated trials, then found the mean of
+the 100 estimates of the carryover parameters. All the biases for
+feasible models for both systolic and diastolic measurements were
+computed and are included here.
+
+The bivariate linear mixed model also appears robust to the normality
+assumption at baseline as the simulated data came from a uniform
+distribution.
+
+\begin{figure}
+\begin{center}
+<<BivariateBias, echo=false, fig=false, include=false>>=
+load("/Users/nzgwynn/LinearMixedModel/TheSequelToTheBigJob/Bias.rda")
+
+opar = par(mar = rep(0,4))
+  ## Our layout will have 3 rows and 3 columns of graphs (1-9), with titles at the top of the 3 columns (10 - 12).  Graph 13 is the main title of the graph.    
+layout (matrix(c(0, 3, 4, 0,
+                 0, 1, 2, 0,
+                 0, rep(0,2),0),
+               nc = 4, byrow = TRUE),
+        ## The widths and heights are defined below, there is a margin on the left and right, and the main title (13) is twice the height of the column titles (10 - 12) 
+        widths = c(lcm(1), 1, 1, lcm(1)),
+        heights = c(lcm(2), 1, lcm(1)))
+## layout.show(4)
+
+library(RColorBrewer) 
+palette(brewer.pal(3, "RdGy"))
+
+ylims = c(-6.6, 1.4)
+boxplot(Bias[,c(1:2)],
+        ann = FALSE, xaxt = "n", yaxt = "n",
+        border = "grey30", frame = FALSE,
+        notch = TRUE, ylim = ylims, col = 3)
+## Including a horizontal line where bias is 0
+abline(h = 0, col = 1, lwd = 2)
+box(col = "lightgrey")
+axis(2, col = "grey50",  at=c(-6,-4, -2, 0, 1),
+     labels=c("-6","-4", "-2", "0", "1"))
+mtext("Systolic                          Diastolic", 1, col = "grey50", cex=2/3)
+
+boxplot(Bias[,c(3:4)],
+        ann = FALSE, xaxt = "n", yaxt = "n",
+        border = "grey30", frame = FALSE,
+        notch = TRUE, ylim = ylims, col = 2)
+## Including a horizontal line where bias is 0
+abline(h = 0, col = 1, lwd = 2)
+box(col = "lightgrey")
+axis(4, col = "grey50",  at=c(-6,-4, -2, 0, 1),
+     labels=c("-6","-4", "-2", "0", "1"))
+mtext("Systolic                          Diastolic", 1, col = "grey50", cex = 2/3)
+
+plot.new()
+plot.window(xlim = c(0,1), ylim = c(0,1))
+text(.5, .25, "Bias in Mean linear mixed model Estimates", font = 2, cex = 1)
+
+plot.new()
+plot.window(xlim = c(0,1), ylim = c(0,1))
+text(.5, .25, "Bias in Mean linear model Estimates", font = 2, cex = 1)
+@ 
+\includegraphics[width = 150mm,keepaspectratio]{Thesis-BivariateBias.pdf}
+\end{center}
+\caption{The mixed effects model gives negligibly biased estimates of
+  the carryover parameter for both systolic and diastolic
+  measurements.}
+\label{gr:BivBias}
+\end{figure}
+
+\subsection{Relative risk}
+Simulations that used a parametric bootstrap to find a $95\%$
+confidence interval of the relative risk for the time after treatment
+ceased appear to be helpful in testing a carryover hypothesis.
+
+Mathematically, we let $rr_{kt_j}(f^{*}_{l})$ be the $k^{th}$
+simulated bootstrap relative risk from the $l^{th}$ simulated trial at
+time $t_j$. We define $f^{*}_{l}$ as the mixed effect model found
+using \texttt{lmer} to maximise the likelihood from the $l^{th}$
+simulated trial. For one combination of parameters in our simulations,
+$l = 1, 2, \ldots, 400$ and $j = 1,2, \ldots, M$. We found the
+$97.5\%$ and $2.5\%$ quantiles of $rr_{kt_j}(f^{*}_{l})$ where $k =
+1,2, \ldots, 100$ and $t_j$ was the first time point after treatment
+ceased. We tested these confidence intervals for $1$.
+
+Intuitively, with no carryover in the model, equiprobable diagnosis in
+the treatment and control arms (relative risk of $1$) after treatment
+ceases seems predictable. As there is no extended impact of treatment,
+due to randomisation, BP in both arms is similar, and diagnosis rates
+should be similar. To support this we use data. The true relative risk
+was found by using a sample size of $10^4$ and no error, all other
+parameters were the same as those discussed in Sec
+\ref{Sec:LMMMethods}. As we have no error in the data, we diagnose
+hypertension when 1 measurement is above the threshold. We found the
+relative risk of incidence hypertension at times when simulated
+carryover was present in the model (i.e. $Z_{it_j} \neq 0$ in Eq
+\eqref{eq:3rdSim}). We plotted the true relative risk at the first
+measurement after treatment ceases. Fig \ref{gr:RelRisk} shows the
+stability around $1$ when carryover is $0$. With increasing magnitudes
+of carryover, no participants in the treatment arm are diagnosed which
+results in a relative risk of $0$. This complicates distinguishing
+magnitudes of carryover which requires further work.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width = 150mm,keepaspectratio]{RelRisks1.pdf}
+\caption{Because the true relative risk of hypertension is
+  approximately 1 the first measurement after treatment ceases when
+  carryover is 0, we can test the bootstrap confidence intervals for 1.}
+\label{gr:RelRisk}
+\end{center}
+\end{figure}
+
+We simulated 400 trials for each combination of parameters. For each
+trial we fit a mixed effect model and used the \texttt{bootMer}
+function in the \texttt{lme4} package in \texttt{R} to find 100
+parametric bootstraps of relative risk at the first measurement after
+treatment ceased (the first $t_j$ where $Z_{it_j} \neq 0$). Using
+these, we computed a $95\%$ confidence interval which we tested for
+$1$. The coverage for the combination of parameters was the percentage
+of bootstrap confidence intervals that contained the value $1$. Fig
+\ref{gr:Coverage} partitions this coverage at the first measurement
+after treatment has ceased by length of carryover. If 1 is in the
+confidence interval our simulations suggest that it is $99\%$ likely
+that the data came from a simulation that contained no carryover in
+the model. The process is outlined in Fig \ref{SchematicBoot}.
+
+
+\begin{sidewaysfigure}[htp]
+  \begin{center}
+    \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,
+      thick,mybox/.style={draw, text width=3.5cm}]
+
+      \node[mybox] (A) {One combination of the parameters outlined in
+        section \ref{Sec:LMMMethods}};
+
+      \node[mybox] (B) [above right= 3cm and 0.25cm of A] {Simulate
+        trial 1 and use \texttt{lmer} to find model $f^{*}_{1}$};
+    
+      \node[mybox] (C) [right of=B, node distance=5.25cm] {Use
+        $f^{*}_{1}$ and \texttt{bootMer} to simulate 100 parametric
+        relative risks $rr_{kt_j}(f^{*}_{1})$};
+      
+      \node[mybox] (D) [right of=C, node distance=5.25cm] {Find $97.5\%$
+        and $2.5\%$ quantiles of $rr_{kt_j}(f^{*}_{1})$ for $k = 1,2,
+        \ldots, 100$};
+       
+      \node[mybox] (E) [right of=D, node distance=5.25cm] {Test
+        quantiles directly after treatment ceases for 1};
+        
+     \node[mybox] (F) [below right= 3cm and 0.25cm of A] {Simulate
+       trial 400 and use \texttt{lmer} to find model $f^{*}_{400}$};
+      
+      \node[mybox] (G) [right of=F, node distance=5.25cm] {Use
+        $f^{*}_{400}$ and \texttt{bootMer} to simulate 100 parametric
+        relative risks $rr_{kt_j}(f^{*}_{400})$};
+        
+      \node[mybox] (H) [right of=G, node distance=5.25cm] {Find $97.5\%$
+        and $2.5\%$ quantiles of $rr_{kt_j}(f^{*}_{400})$ for $k = 1,2,
+        \ldots, 100$};
+       
+      \node[mybox] (I) [right of=H, node distance=5.25cm] {Test
+       quantiles directly after treatment ceases for 1};
+        
+      \node[mybox] (J) [right of = A, node distance = 5.25cm
+      ]{Simulate trial $l$ and use \texttt{lmer} to find model $f^{*}_{l}$};
+      
+      \node[right of = J, node distance = 9.75cm](DOTS) {};
+      \matrix[row sep = 0.3cm, column sep = 4.8cm, right of =
+      DOTS](framematrix){ \node(dots1) {$\ldots$}; & \node(dots1)
+        {$\ldots$}; &
+        \node(dots1) {$\ldots$}; &\\
+      };
+      
+      \node[below right = 2cm and 9cm of B](DOTS) {}; \matrix[row
+      sep = 0.3cm, column sep = 4.8cm, right of = DOTS](framematrix){
+        \node(dots1) {$\vdots$}; & \node(dots1) {$\vdots$}; &
+        \node(dots1) {$\vdots$}; &\\
+      };
+      
+      \node[above right = 2cm and 9cm of F](DOTS) {}; \matrix[row
+      sep = 0.3cm, column sep = 4.8cm, right of = DOTS](framematrix){
+        \node(dots1) {$\vdots$}; & \node(dots1) {$\vdots$}; &
+        \node(dots1) {$\vdots$}; &\\
+      };
+
+      \draw[->] (A)--(B); \draw[->] (B)--(C); \draw[->] (C)--(D);
+      \draw[->] (D)--(E); \draw[->] (A)--(F); \draw[->] (F)--(G);
+      \draw[->] (G)--(H); \draw[->] (H)--(I); \draw[->] (A)--(J);
+    \end{tikzpicture}
+  \end{center}
+  \captionof{figure}{Schematic overview of bootstrapping for relative
+    risks. This method allows us to accurately test a carryover
+    hypothesis. Adapted from \cite{efron1994introduction}.}
+  \label{SchematicBoot}
+\end{sidewaysfigure} 
+
+\begin{figure}
+\begin{center}
+\includegraphics[width = 150mm,keepaspectratio]{CoverageRLined.pdf}
+  \caption{Proportion of bootstrap confidence intervals that contain 1
+    partitioned by length of carryover. When carryover is 0, 1 is the
+    true value and is likely to be in the confidence intervals.}
+\label{gr:Coverage}
+\end{center}
+\end{figure}
+
+\section*{Conclusion}
+\label{sec:LMMConclusion}
+Our simulations suggest that using a mixed effect model to estimate
+carryover parameters will give negligibly biased estimates in both
+systolic and diastolic models. Once a model is fit, a parametric
+bootstrap of the relative risk can be done for the measurement
+directly after treatment ceases. If $1$ is in the bootstrap confidence
+interval it is highly likely there is no carryover in the model from
+which the data were simulated.
+
+Testing for duration of carryover will require more effort as
+insufficient participants are diagnosed in the treatment arm. Survival
+analysis may provide a viable solution in these situations.
+\clearpage
+
+
+\section*{Supporting information}
+
+
+
+
+
+\clearpage
+\section*{Acknowledgments}
+
+\nolinenumbers
+
+% Either type in your references using
+% \begin{thebibliography}{}
+% \bibitem{}
+% Text
+% \end{thebibliography}
+%
+% or
+%
+% Compile your BiBTeX database using our plos2015.bst
+% style file and paste the contents of your .bbl file
+% here. See http://journals.plos.org/plosone/s/latex for 
+% step-by-step instructions.
+% 
+%\begin{thebibliography}{}
+
+%\end{thebibliography}
+
+\bibliography{LMMPlos1.bib}     % Bibliography file (usually '*.bib' ) 
+
+
+\end{document}
+
