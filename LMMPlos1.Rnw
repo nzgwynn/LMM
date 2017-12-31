@@ -193,6 +193,7 @@
 
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 \vspace*{0.2in}
 
 % Title must be 250 characters or less.
@@ -204,7 +205,7 @@
 \newline
 % Insert author names, affiliations and corresponding author email (do not include titles, positions, or degrees).
 \\
-S. Gwynn Sturdevant\textsuperscript{1*},
+s. gwynn sturdevant\textsuperscript{1*},
 Thomas Lumley\textsuperscript{2},
 \\
 \bigskip
@@ -264,14 +265,9 @@ New Zealand healthcare organisation.
 
 % Use "Eq" instead of "Equation" for equation citations.
 \section*{Introduction}
-Rates of diabetes and hypertension are on the rise and responsible for
-increased death and disease \cite{HBPRisks}. With disease, 
-researchers want to investigate treatments that delay the onset; ``prevention
-is better than treatment'' \cite{Prevention}. Unfortunately,
-statistical methodoloy has not yet been developed that enables
-investigators to test this hypothesis. We use
-Stephen Senn's definition of carryover effects as the ``residual effects'' of
-treatment after it has ceased \cite{First25Years}. He also notes
+On 13 November 2017, experts reduced thresholds for diagnosing hypertension from $140$ mm Hg/ $90$ mm Hg to $130$ mm hg/ $80$ mm Hg \cite{WashPost}. The new guidelines note that "higher SBP [systolic blood pressure] and DBP [diastolic blood pressure] were associated with increased risk of" death and disease \cite{Whelton24430, BPArt, HBPRisks}. They recommend "antihypertensive medication... with lifestyle modification" \cite{Whelton24430} to lower BP. Besides lowering elevated BP, investigators could explore treatments that keep low BP low, or have carryover effects: ``prevention is better than treatment'' \cite{Prevention}. Unfortunately, no statistical methodoloy currently tests this hypothesis for this outcome. 
+
+We use Stephen Senn's definition of carryover effects as the ``residual effects'' of treatment after it has ceased \cite{First25Years}. He also notes
 ``that little has appeared ... on the subject of modelling for
 carry-over [sic] that is more grounded in clinical and pharmocological
 reality'' \cite{First25Years}. Recently, three studies have attempted
@@ -289,7 +285,7 @@ that ``the effect of active treatment on delaying the onset of
 hypertension can extend up to 2 years after the discontinuation of
 treatment`` \cite{TROPHY1}.
 
-Three authors have criticised TROPHY's design. Meltzer (2006)
+Researchers have criticised TROPHY's design. Meltzer (2006)
 criticised TROPHY's design as having an ``idiosyncratic primary
 endpoint [that] seriously impairs external applicability.''  Persell
 and Baker (2006) noted that cumulative diagnosis rates would differ
@@ -298,9 +294,8 @@ even with identical underlying BP.  Futhermore, simulations suggest an
 underlying data \cite{Trophies-or-Dreams}. 
 
 In broad terms, the design error hinges on treatment lowering BP for
-the first two years. Since this occurs, measurements in excess of the
-threshold in this arm during this period are less likely. Defining
-hypertension as 3 measurements in excess results in lower diagnosis
+the first two years. Because measurements in excess of the
+threshold are less likely, incidence of hypertension in the treatment arm are artificially reduced. Defininghypertension as 3 measurements in excess results in lower diagnosis
 rates in the treatment arm regardless of carryover. A more thorough
 discussion of the faults in TROPHY and carryover effects can be found
 in Sturdevant and Lumley (2016) \cite{Sturdevant2016}.
@@ -568,42 +563,6 @@ distribution.
 
 \begin{figure}
 \begin{center}
-<<QQPlots, echo=false, fig=false, include=false>>=
-load("Norm.of.SMSTS.rda")
-load("Norm.of.DMSTS.rda")
-  
-## The graphs in the layout below will all have margins of 0 cm.
-opar = par(mar = rep(0,4))
-## Our layout will have 3 rows and 3 columns of graphs (1-9), with titles at the top of the 3 columns (10 - 12).  Graph 13 is the main title of the graph.    
-layout (matrix(c(0, 3, 4, 0,
-                 0, 1, 2, 0,
-                 0, rep(0,2),0),
-               nc = 4, byrow = TRUE),
-          ## The widths and heights are defined below, there is a margin on the left and right, and the main title (13) is twice the height of the column titles (10 - 12) 
-        widths = c(lcm(1), 1, 1, lcm(1)),
-        heights = c(lcm(2), 1, lcm(1)))
-  
-library(RColorBrewer) 
-palette(brewer.pal(3, "RdGy"))
-    
-qqnorm(Norm.of.SMSTS, ann = FALSE, xaxt = "n", yaxt = "n", frame = FALSE)
-box(col = "lightgrey")
-axis(2, col = "grey50",  at=c(60,80,100,120,140,160), labels=c("60","80","100","120","140","160"))
-axis(1, col = "grey50",  at=c(-4,-2,0,2,4), labels=c("-4","-2","0","2","4"))
-
-qqnorm(Norm.of.DMSTS, ann = FALSE, xaxt = "n", yaxt = "n", frame = FALSE)
-box(col = "lightgrey")
-axis(4, col = "grey50",  at=c(40,60,80,100,120,140,160), labels=c("40","60","80","100","120","140","160"))
-axis(1, col = "grey50",  at=c(-4,-2,0,2,4), labels=c("-4","-2","0","2","4"))
-
-plot.new()
-plot.window(xlim = c(0,1), ylim = c(0,1))
-text(.5, .25, "Q-Q Plot of Systolic BP", font = 2, cex = 1.5)
-
-plot.new()
-plot.window(xlim = c(0,1), ylim = c(0,1))
-text(.5, .25, "Q-Q Plot of Diastolic BP", font = 2, cex = 1.5)
-@
 \includegraphics[width = 150mm,keepaspectratio]{Thesis-QQPlots.pdf}
 \caption{Q-Q Plots for both systolic and diastolic blood
   pressures. Besides terminal digit preference, there is not evidence
@@ -806,141 +765,6 @@ diagnosis.
 
 \begin{figure}
 \begin{center}
-<<ModelBias, echo=false, fig=false, include=false>>=
-load("/Users/nzgwynn/LinearMixedModel/CheckMEst.rda")
-load("/Users/nzgwynn/LinearMixedModel/True.Vals.rda")
-
-# We want 4 graphs for each combination of treatment, carryover, and rule. We want both LMer and LM estimates of treatment effect (x) and carryover (z).  We will index through ParForGraphs, so that we do not need to copy the coding 200 times.
-ParForGraphs = expand.grid(
-  list(treatment = c("-10"),
-       carryover = c("2"),
-       rule = c("rule3over")),
-  stringsAsFactors = FALSE)
-
-# These are used in the loops below to make 1 graph.  The graphs are organised so that treatment length is on the x axis, standard deviation is in the rows, and columns indicate frequency of measurements.
-error.sd = c("7", "3")
-times = c("0.25")
-end.of.treatment = c("1", "1.5", "2", "2.5", "3")
-xaxis.labels = end.of.treatment
-ylims = c(-1.5,1.75)
-
-# These will be used to make the titles for the 200 graphs
-Main.Title = c("3 Over")
-
-# Binding Main.Title to ParForGraphs - this will be used to construct titles below.
-ParForGraphs = cbind(ParForGraphs, Main.Title)
-
-# A quarter of the number of graphs we want to make, is the number of rows we will need to locate. We will use 4 different columns from the same rows, subtract off the true values and graph the resulting bias'. 
-no.of.rows = nrow(ParForGraphs)
-
-# Finding the correct rows
-for (l in 1:no.of.rows){
-  # There are 4 columns which are of interest: treatment effect using lmer, treatmemt effect using lm, carryover using lmer, and carryover using lm.
-  cols = c("z.lmer", "z.lm")
-  
-  ## The graphs in the layout below will all have margins of 0 cm.
-  opar = par(mar = rep(0,4))
-  ## Our layout will have 3 rows and 3 columns of graphs (1-9), with titles at the top of the 3 columns (10 - 12).  Graph 13 is the main title of the graph.    
-  layout (matrix(c(0, rep(7,2), 0,
-                   0, 5, 6, 0,
-                   0, 1, 3, 0,
-                   0, 2, 4, 0,
-                   0, rep(0,2),0),
-                 nc = 4, byrow = TRUE),
-          ## The widths and heights are defined below, there is a margin on the left and right, and the main title (13) is twice the height of the column titles (10 - 12) 
-          widths = c(lcm(1), 1, 1, lcm(1)),
-          heights = c(lcm(2), lcm(1), 1, 1, lcm(1)))
-  
-  library(RColorBrewer) 
-  palette(brewer.pal(3, "RdGy"))
-    
-  ## layout.show(9)
-  
-  for(k in 1: length(cols)){
-    
-    if(k == 1) {colour = 3}else{colour = 2}
-  
-    # i is the row number for the graphs
-    for(i in 1: length(error.sd)){
-      rows = which(CheckMEst[,"treatment",1] == ParForGraphs[l, "treatment"]  &
-        CheckMEst[,"rule",1] == ParForGraphs[l, "rule"] &
-        CheckMEst[,"carryover",1] == ParForGraphs[l, "carryover"] &
-        CheckMEst[,"error.sd",1] == error.sd[i] &
-        CheckMEst[,"times",1] == times)
-      
-      rows.True = which(True.Vals[,"treatment",1] ==
-        ParForGraphs[l, "treatment"] &
-        True.Vals[,"rule",1] == ParForGraphs[l, "rule"] &
-        True.Vals[,"carryover",1] == ParForGraphs[l, "carryover"] &
-        True.Vals[,"carryover.vary",1] == ParForGraphs[l, "carryover"] &
-        True.Vals[,"times",1] == times)
-      
-      boxplot(as.numeric(CheckMEst[rows[1],cols[k],]) -
-              as.numeric(True.Vals[rows.True, "z.lm",]),
-              as.numeric(CheckMEst[rows[2],cols[k],]) -
-              as.numeric(True.Vals[rows.True, "z.lm",]),
-              as.numeric(CheckMEst[rows[3],cols[k],]) -
-              as.numeric(True.Vals[rows.True, "z.lm",]),
-              as.numeric(CheckMEst[rows[4],cols[k],]) -
-              as.numeric(True.Vals[rows.True, "z.lm",]),
-              as.numeric(CheckMEst[rows[5],cols[k],]) -
-              as.numeric(True.Vals[rows.True, "z.lm",]),
-              ann = FALSE, xaxt = "n", yaxt = "n",
-              border = "grey30", frame = FALSE,
-              notch = TRUE, ylim = ylims, col = colour)
-      ## Including a horizontal line where bias is 0
-      abline(h = 0, col = 1, lwd = 2)
-      box(col = "lightgrey")
-
-      ## Labelling y axis
-      if(k == 1 && i%%2 == 1)
-        axis(2, col = "grey50",  at=c(-1,0,1),
-             labels=c("-1","0","1"))
-
-      ## Labelling y axis
-      if(k == 2 && i%%2 == 0)
-        axis(4, col = "grey50",  at=c(-1,0,1),
-             labels=c("-1","0","1"))
-
-      ## Inserting label on the top row of graphs
-      if(k == 2 && i == 1)
-        mtext("standard deviation 7", 4, col = "grey50", cex = 2/3 )
-
-      ## Inserting label on the bottom row of graphs
-      if(i == 2 && k == 1)
-        mtext("standard deviation 3", 2, col = "grey50", cex = 2/3 )
-
-      ## Inserting x axis labels
-      if (i == 2 && k == 2)
-        axis(1,at=1:length(xaxis.labels), lab=xaxis.labels, col="grey50")
- 
-    }
-    ## Closing off the loop for number of error.sd [i]
-  }
-  ## Closing off the loop for length cols [k]
-
-    
-    # Inserting the title for column 1 above.
-    plot.new()
-    # The xlim and ylim will allow the centreing of the text both horizontally and vertically below in the the text command.
-    plot.window(xlim = c(0,1), ylim = c(0,1))
-    text(.5, .25, "Linear Mixed Model", font = 2)
-
-    # Inserting the title for column 2 above.
-    plot.new()
-    # The xlim and ylim will allow the centreing of the text both horizontally and vertic  ally below in the the text command.
-    plot.window(xlim = c(0,1), ylim = c(0,1))
-    text(.5, .25, "Linear Model", font = 2)
-
-    # Inserting the main title computed above in the graph number 13
-    plot.new()
-    # The xlim and ylim will allow the centreing of the text both horizontally and vertically below in the the text command.
-    plot.window(xlim = c(0,1), ylim = c(0,1))
-    text(.5, .25, paste("Bias in Estimates"),
-         font = 2, cex = 1.5)
-  
-}
-@
 \includegraphics[width = 150mm,keepaspectratio]{Thesis-ModelBias.pdf}
 \end{center}
 \caption{Boxplots of mean bias in estimates of carryover parameter for
@@ -965,54 +789,6 @@ distribution.
 
 \begin{figure}
 \begin{center}
-<<BivariateBias, echo=false, fig=false, include=false>>=
-load("/Users/nzgwynn/LinearMixedModel/TheSequelToTheBigJob/Bias.rda")
-
-opar = par(mar = rep(0,4))
-  ## Our layout will have 3 rows and 3 columns of graphs (1-9), with titles at the top of the 3 columns (10 - 12).  Graph 13 is the main title of the graph.    
-layout (matrix(c(0, 3, 4, 0,
-                 0, 1, 2, 0,
-                 0, rep(0,2),0),
-               nc = 4, byrow = TRUE),
-        ## The widths and heights are defined below, there is a margin on the left and right, and the main title (13) is twice the height of the column titles (10 - 12) 
-        widths = c(lcm(1), 1, 1, lcm(1)),
-        heights = c(lcm(2), 1, lcm(1)))
-## layout.show(4)
-
-library(RColorBrewer) 
-palette(brewer.pal(3, "RdGy"))
-
-ylims = c(-6.6, 1.4)
-boxplot(Bias[,c(1:2)],
-        ann = FALSE, xaxt = "n", yaxt = "n",
-        border = "grey30", frame = FALSE,
-        notch = TRUE, ylim = ylims, col = 3)
-## Including a horizontal line where bias is 0
-abline(h = 0, col = 1, lwd = 2)
-box(col = "lightgrey")
-axis(2, col = "grey50",  at=c(-6,-4, -2, 0, 1),
-     labels=c("-6","-4", "-2", "0", "1"))
-mtext("Systolic                          Diastolic", 1, col = "grey50", cex=2/3)
-
-boxplot(Bias[,c(3:4)],
-        ann = FALSE, xaxt = "n", yaxt = "n",
-        border = "grey30", frame = FALSE,
-        notch = TRUE, ylim = ylims, col = 2)
-## Including a horizontal line where bias is 0
-abline(h = 0, col = 1, lwd = 2)
-box(col = "lightgrey")
-axis(4, col = "grey50",  at=c(-6,-4, -2, 0, 1),
-     labels=c("-6","-4", "-2", "0", "1"))
-mtext("Systolic                          Diastolic", 1, col = "grey50", cex = 2/3)
-
-plot.new()
-plot.window(xlim = c(0,1), ylim = c(0,1))
-text(.5, .25, "Bias in Mean linear mixed model Estimates", font = 2, cex = 1)
-
-plot.new()
-plot.window(xlim = c(0,1), ylim = c(0,1))
-text(.5, .25, "Bias in Mean linear model Estimates", font = 2, cex = 1)
-@ 
 \includegraphics[width = 150mm,keepaspectratio]{Thesis-BivariateBias.pdf}
 \end{center}
 \caption{The mixed effects model gives negligibly biased estimates of
