@@ -563,7 +563,7 @@ distribution.
 
 \begin{figure}
 \begin{center}
-\includegraphics[width = 150mm,keepaspectratio]{Thesis-QQPlots.pdf}
+\includegraphics[width = 150mm,keepaspectratio]{LMMPlos1-QQPlots.pdf}
 \caption{Q-Q Plots for both systolic and diastolic blood
   pressures. Besides terminal digit preference, there is not evidence
   against normality.}
@@ -765,7 +765,7 @@ diagnosis.
 
 \begin{figure}
 \begin{center}
-\includegraphics[width = 150mm,keepaspectratio]{Thesis-ModelBias.pdf}
+\includegraphics[width = 150mm,keepaspectratio]{LMMPlos1-ModelBias.pdf}
 \end{center}
 \caption{Boxplots of mean bias in estimates of carryover parameter for
   the mixed effects model (left panel) and the linear model (right
@@ -789,7 +789,7 @@ distribution.
 
 \begin{figure}
 \begin{center}
-\includegraphics[width = 150mm,keepaspectratio]{Thesis-BivariateBias.pdf}
+\includegraphics[width = 150mm,keepaspectratio]{LMMPlos1-BivariateBias.pdf}
 \end{center}
 \caption{The mixed effects model gives negligibly biased estimates of
   the carryover parameter for both systolic and diastolic
