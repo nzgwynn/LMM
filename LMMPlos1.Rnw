@@ -248,8 +248,8 @@ Thomas Lumley\textsuperscript{2},
 \section*{Abstract}
 Carryover (the effects of treatment after it ceases) has been largely
 ignored in statistical literature except as a nuisance
-parameter. Investigators have began exploring carryover but with
-faulty methodology. In particular, when testing for carryover when the
+parameter. Investigators have begun exploring carryover but with
+faulty methodologies. In particular, when testing for carryover when the
 outcome is a diagnosis based on a noisy measurement crossing a
 threshold (such as in blood pressure), and diagnosis is followed by
 open-label treatment, a simple comparison of cumulative incidence
@@ -296,6 +296,8 @@ Defining hypertension as 3 measurements in excess results in lower diagnosis
 rates in the treatment arm regardless of carryover. Because treatment lowers BP for
 the first two years, measurements above the threshold are unlikely, and incidence of hypertension in the treatment arm is reduced. Investigators attributed the lower incidence to carryover, not recognizing this inherent flaw. See Sturdevant (2016) \cite{Sturdevant2016} for details.
 
+We propose a method to test a carryover hypothesis.
+
 \subsection{Solutions}
 \label{Sec:Solns}
 We explored several methods: a simple design, a rerandomisation
@@ -316,7 +318,7 @@ remaining participants are rerandomised to treatment or control
 investigators rerandomise remaining participants after treatment has
 ceased in the treatment arm, then analyse data. Nason suggests two
 methods for analysis: mixture models and the Maentel---Haenszel
-estimator.  The mixture model assumes no ``period effect'' \cite{Nason2010}. There is a non-negligible positive trend which results in higher rates of 
+estimator.  The mixture model assumes no ``period effect'' \cite{Nason2010}. In our data, there is a non-negligible positive trend which results in higher rates of 
 diagnosis in the second period \cite{Trophies-or-Dreams,
   TROPHY-win-the-prize}; this also caused the crossover design to fail
 \cite{Sturdevant2016}. The second approach uses the Maentel---Haenszel
@@ -340,7 +342,7 @@ investigators used different thresholds of PSA levels in the two arms
 of the study to determine if a biopsy was necessary; high levels were
 sent to a statistical centre for analysis \cite{goodman2006prostate}.
 
-Although awkward, Prostate Cancer Prevention Trial methodologies could be implemented. Identifying all participants with hypertension could occur after an extended wash-out period to remove all carryover effects. Ambulatory BP (participants wear a cuff for an extended time which measures BP every 15 - 30 minutes) could be used after the trial \cite{pickering2005recommendations}.
+Although awkward, Prostate Cancer Prevention Trial methodologies could be implemented. Identifying all participants with hypertension could occur after an extended wash-out period to remove all carryover effects. Ambulatory BP (participants wear a cuff for an extended time which measures BP every 15 - 30 minutes) could be used  \cite{pickering2005recommendations}.
 
 Adjusting thresholds will require higher rates of diagnosis in the first half of the trial in the treatment group, as BP is artificially lowered. The second half requires higher rates of diagnosis in the control group. Investigators must account for variation in the impact of treatment on BP \cite{SDTreatmentEffect}; diagnosing people with the highest BP with treatment may not equate to diagnosing people with the highest underlying BP.
 
@@ -350,11 +352,9 @@ The rest of this article will discuss analysing resultant data.
 \label{Sec:AnalysingData}
 This approach is difficult due to missing data. After diagnosis
 participants are given open-label treatment which results in
-later measurements being lowered due to the
-treatment. Because these measurements are lowered, it is impossible
-to determine if the effect of the initial treatment is extenuated. 
+later measurements being lowered. Because these measurements are lowered, it is impossible to determine if the effect of the initial treatment is extenuated. 
 
-As data after diagnosis is missing, estimating carryover parameters using
+Because data after diagnosis is missing, estimating carryover parameters using
 a linear model results in biased estimates. However, all data
 after diagnosis is missing deterministically based upon
 previous measurements. As missing data is based on previous
@@ -505,6 +505,8 @@ deleted diastolic measurements less than 30 mm Hg which were likely
 the result of a recording error.  Participants with only 1 measurement
 were also deleted.
 
+Because we completed this research prior to November 2017, we used the threshold $140/90$ mm Hg. Adjusting the threshold will not alter our findings.
+
 %The first two assumptions (random effects in the data and normality of random effect) show that when using linear mixed models, correct specification of the random effects is important. 
 
 \subsection{Normality}
@@ -537,7 +539,9 @@ and BP measurement, respectively, for person $i$ at time $t_{j}$.
 
 For the first 4 years, we partitioned them into $90$ day intervals, after 4 years, we increased the interval lengths to $180$ days for smoothness; 4 years
 is also the duration of our study. Fig \ref{gr:MeanVariogram} shows
-the mean of each partition.
+the mean of each partition and suggests no evidence of
+autocorrelation in this data. Fluctuations are likely due to variation
+among the data.
 
 \begin{figure}
 \begin{center}
@@ -549,19 +553,17 @@ the mean of each partition.
 \end{center}
 \end{figure}
 
-The stability of Fig \ref{gr:MeanVariogram} suggests no evidence of
-autocorrelation in this data. Fluctuations are likely due to variation
-among the data.
+
 
 \subsection{Random effects}
 To identify if fixed or random effects in the gradient most accurately represented the measurements within
-people we also used the data. We separated it into those above and below age
+people we also used these data. We separated it into those above and below age
 $50$ and randomly drew $10,000$ samples of size $400$ from both
 subpopulations. We fit 2 mixed effect models to both systolic and
 diastolic BP to all $20,000$ samples. One model was $Y_{it_j}= a_i
 +\beta t_{it_j} + \epsilon_{it_j}$, the other $Y_{it_j}= a_i
 +b_it_{it_j} + \epsilon_{it_j}$; the first model has a fixed trend,
-the second a random trend. We fit fixed and random trend effects for
+the second a random trend. We fit both models for
 systolic and diastolic BP to the $23,786$ measurements for people less
 than age 50, and the $79,312$ above to find the population trend. The
 percent of confidence intervals for $\beta$ and $b_i$ which contained
@@ -591,29 +593,23 @@ of simulations.
 \section{Methods}
 \label{Sec:LMMMethods}
 We conducted three systematic simulation studies as outlined in Fig
-\ref{SchematicSims}. The first set demonstrated that restricted
-maximum likelihood gave unbiased estimates of the carryover parameter
-using the \texttt{lmer} function in \texttt{R} \cite{LMERCite1,
-  LMERCite2}. The second set demonstrated the same using both systolic
-and diastolic BP. The third involved using the \texttt{bootMer} to
-find confidence intervals for the relative risk.
+\ref{SchematicSims}. 
 
 \begin{figure}[htp]
   \begin{center}
     \begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,
       thick,mybox/.style={draw, text width=8cm}]
 
-      \node[mybox] (A) {Primary Simulations: Mixed Effect Model -
+      \node[mybox] (A) {\textbf{Primary Simulations}: Mixed Effect Model -
         Random Intercept; Systolic BP only};
 
       \node[mybox] (B) [below of=A, node distance=5cm] {Secondary
-        Simulations: Mixed Effect Model - Random Intercept; Both
-        systolic and diastolic BP};
+        Simulations: Mixed Effect Model - Random Intercept; \textbf{Bivariate} --- Both systolic and diastolic BP};
 
       \node[mybox] (C) [below of=B, node distance=5cm] {Tertiary
         Simulations: Mixed Effect Model - Random intercept, gradient,
         and treatment effects; Systolic BP only; Bootstrap to generate
-        confidence intervals of relative risks};
+        confidence intervals of \textbf{relative risks}};
 
       \draw[->] (A)--(B); \draw[->] (B)--(C);
     \end{tikzpicture}
@@ -624,12 +620,12 @@ find confidence intervals for the relative risk.
 \end{figure}
 
 
+\subsection{Primary simulation}
+ \label{Sec:PrimSim}
 Our first simulation began by randomly generating a number from a
 uniform distribution between 125 -- 140 mm Hg; TROPHY trial
 participants had systolic BP close to the $140$ mm Hg threshold
-\cite{TROPHY1}. Trends of 0, 1, and 2 mm Hg per year were used as
-systolic BP increases over time \cite{Trend-in-Hyp-1,
-  Trend-in-Hyp-2}. The treatment arm was given treatments of either
+\cite{TROPHY1}. Because systolic BP increases over time, we added trends of 0, 1, and 2 mm Hg per year \cite{Trend-in-Hyp-1, Trend-in-Hyp-2}. The treatment arm was given treatments of either
 $-$5 mm Hg or $-10$ mm Hg for either 1, 1.5, 2, 2.5, or 3 years
 \cite{Trophies-or-Dreams}. Measurements were taken every 3 months, 6
 months, or yearly, and carryovers of length 0, 0.5, 1, 1.5, and 2
@@ -642,8 +638,11 @@ and \texttt{lmer} in \texttt{R}; \texttt{lm} fits a linear model,
 while \texttt{lmer} fits a mixed effect model with random and fixed effects
 outlined in Fig \ref{SchematicSims}.
 
+\subsection{Bivariate simulation}
+ \label{Sec:SecoSim}
+
 The second set of simulations involved both systolic and diastolic
-measurements. We generated baseline systolic BP and systolic trend as above. Baseline diastolic BP was randomly generated between 80 -- 90
+measurements. We used the same baseline systolic BP and systolic trend as our first set. Baseline diastolic BP was randomly generated between 80 -- 90
 mm Hg. Because there is a quadratic effect with age, trends of -1, 0, and 1 mm
 Hg per year were used \cite{DiaCite}.  All combinations of systolic
 and diastolic trends were used in the simulation. Variation in systolic BP of 3, 5, and 7 mm Hg corresponded to variation in diastolic BP of 2, 3, and 4 mm Hg\cite{DiaCite}.  Active treatment was assumed to lower
@@ -659,9 +658,11 @@ systolic BP when $k$ is 1, and diastolic BP otherwise. The \texttt{lm}
 estimates used a sum of squares maximisation, while \texttt{lmer} used
 restricted maximum likelihood \cite{LMERCite1, LMERCite2}.
 
+\subsection{Relative risks}
+ \label{Sec:TertSim}
 In the third set of simulations we generated data using random effects
-for both treatment effect and trend. We generated baseline systolic
-measurements as above. Our simulated trend for each person was sampled
+for both treatment effect and trend. Baseline systolic
+measurements were generated as before. Our simulated trend for each person was sampled
 from a random normal distribution with mean $0,1$ or $2$ mm Hg per
 year and standard deviation $1.5$ mm Hg, which our data
 indicated. Random treatment effects were found by sampling from a
@@ -672,7 +673,7 @@ model with random effects for intercept, trend, and treatment effects
 Y_{it_j}=a_i +b_i t_{it_j} + c_i X_{it_j}+ \delta Z_{it_j} + \epsilon_{it_j}.
 \label{eq:3rdSim}
 \end{align}
-We used the measurement schedules and lengths of carryover from above.
+We used the measurement schedules and lengths of carryover from our first set.
 
 For each combination of parameters we simulated 400 trials, fit a
 mixed effects model using \texttt{lmer}, and used the \texttt{bootMer}
@@ -697,7 +698,7 @@ diagnosis.
  \section{Results and discussion}
  \label{sec:LMMResults}
 
- \subsection{Primary simulation results}
+ \subsection{Primary simulation}
  \label{Sec:lmerWorks}
  Our first simulation demonstrated that the \texttt{lmer} function in
  \texttt{R} gave negligibly biased estimates for the carryover
