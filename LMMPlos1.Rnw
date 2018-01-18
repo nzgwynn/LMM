@@ -265,9 +265,9 @@ New Zealand healthcare organisation.
 
 % Use "Eq" instead of "Equation" for equation citations.
 \section*{Introduction}
-On 13 November 2017, experts reduced thresholds to diagnose hypertension from $140/90$ mm Hg to $130/80$ mm Hg \cite{WashPost}. The new guidelines note that "higher SBP [systolic blood pressure] and DBP [diastolic blood pressure] were associated with increased risk of" death and disease \cite{Whelton24430, BPArt, HBPRisks}. They recommend "antihypertensive medication... with lifestyle modification" \cite{Whelton24430} to lower blood presuure (BP). 
+On 13 November 2017, experts reduced thresholds to diagnose hypertension from $140/90$ mm Hg to $130/80$ mm Hg \cite{WashPost}. The new guidelines noted that "higher SBP [systolic blood pressure] and DBP [diastolic blood pressure] were associated with increased risk of" death and disease \cite{Whelton24430, BPArt, HBPRisks}. They recommended "antihypertensive medication... with lifestyle modification" \cite{Whelton24430} to lower blood presuure (BP). 
 
-To address the impacts of elevated BP, investigators could explore interventions that continue to reduce BP after interventions are stopped. We use Stephen Senn's definition of carryover effects as the ``residual effects'' of treatment after it has ceased \cite{First25Years}. He also notes
+To address the impacts of elevated BP, investigators could explore interventions that continue to reduce BP after they are stopped. We use Stephen Senn's definition of carryover effects as the ``residual effects'' of treatment after it has ceased \cite{First25Years}. He also notes
 ``that little has appeared ... on the subject of modelling for
 carry-over [sic] that is more grounded in clinical and pharmocological
 reality'' \cite{First25Years}. Recently, three studies have attempted
@@ -296,14 +296,12 @@ Defining hypertension as 3 measurements in excess results in lower diagnosis
 rates in the treatment arm regardless of carryover. Because treatment lowers BP for
 the first two years, measurements above the threshold are unlikely, and incidence of hypertension in the treatment arm is reduced. Investigators attributed the lower incidence to carryover, not recognizing this inherent flaw. See Sturdevant (2016) \cite{Sturdevant2016} for details.
 
-We propose a method to test a carryover hypothesis.
-
 \subsection{Solutions}
 \label{Sec:Solns}
-We explored several methods: a simple design, a rerandomisation
+We explored several methods to test a carryover hypothesis: a simple design, a rerandomisation
 design, methodology similar to the Prostate Cancer Prevention Trial, and analysing resultant data.
 
-Comparing cumulative incidences in a parallel or a crossover design does not work.
+Comparing cumulative incidences in a parallel or a crossover design does not work
 \cite{Sturdevant2016}. In the parallel design, noisy measurements
 combined with treatment effects result in diagnosis rates which are
 consistently lower in the treatment arm regardless of carryover. In
@@ -342,7 +340,7 @@ investigators used different thresholds of PSA levels in the two arms
 of the study to determine if a biopsy was necessary; high levels were
 sent to a statistical centre for analysis \cite{goodman2006prostate}.
 
-Although awkward, Prostate Cancer Prevention Trial methodologies could be implemented. Identifying all participants with hypertension could occur after an extended wash-out period to remove all carryover effects. Ambulatory BP (participants wear a cuff for an extended time which measures BP every 15 - 30 minutes) could be used  \cite{pickering2005recommendations}.
+Although awkward, Prostate Cancer Prevention Trial methodologies could be implemented. Identifying all participants with hypertension could occur after an extended wash-out period to remove all carryover effects. Ambulatory BP (participants wear a cuff for an extended time which measures BP every 15 - 30 minutes) would be used  \cite{pickering2005recommendations}.
 
 Adjusting thresholds will require higher rates of diagnosis in the first half of the trial in the treatment group, as BP is artificially lowered. The second half requires higher rates of diagnosis in the control group. Investigators must account for variation in the impact of treatment on BP \cite{SDTreatmentEffect}; diagnosing people with the highest BP with treatment may not equate to diagnosing people with the highest underlying BP.
 
@@ -649,7 +647,7 @@ and diastolic trends were used in the simulation. Variation in systolic BP of 3,
 systolic pressure by 5 or 10 mm Hg which corresponded to diastolic
 decreasing by 3 and 6 mm Hg \cite{DiaCite}. We used the
 same lengths of study, durations of treatments, and carryover lengths
-as our first set.
+as the primary simulation.
 
 We fit the model $Y_{ikt_j} = a_{ik} +\beta_{k}
 t_{it_j} + \gamma_{k} X_{it_j} + \delta_{k} Z_{it_j} + \epsilon_{ikt_j}$
@@ -673,11 +671,11 @@ model with random effects for intercept, trend, and treatment effects
 Y_{it_j}=a_i +b_i t_{it_j} + c_i X_{it_j}+ \delta Z_{it_j} + \epsilon_{it_j}.
 \label{eq:3rdSim}
 \end{align}
-We used the measurement schedules and lengths of carryover from our first set.
+We used the measurement schedules and lengths of carryover from the primary simulation.
 
-For each combination of parameters we simulated 400 trials, fit a
+For each and every combination of parameters we simulated 400 trials, fit a
 mixed effects model using \texttt{lmer}, and used the \texttt{bootMer}
-function to simulate 100 parametric bootstraps of the relative risk
+function to simulate 100 parametric bootstraps of the relative risk of hypertension
 \cite{LMERCite1, LMERCite2}. A schematic of these simulations can be
 found in Fig \ref{SchematicBoot}.
 
@@ -700,11 +698,9 @@ diagnosis.
 
  \subsection{Primary simulation}
  \label{Sec:lmerWorks}
- Our first simulation demonstrated that the \texttt{lmer} function in
- \texttt{R} gave negligibly biased estimates for the carryover
- parameter.  Fig \ref{gr:lmerWorks} shows bias in estimates for
- carryover found using the linear model and the mixed effects model fit to
- $100$ simulated trials. The relevant parameters are: treatment effect
+ Fig \ref{gr:lmerWorks} shows negligible bias in estimates for
+ carryover found using the mixed effects model fit to
+ $100$ simulated trials using the \texttt{lmer} function in \texttt{R}. The relevant parameters are: treatment effect
  $-10$ mm Hg, carryover $2$ years, and diagnosis defined by $3$
  measurements above the $140$ mm Hg threshold.  The horizontal axis
  separates lengths of treatment $1, 1.5, 2, 2.5,$ or $3$ years and the
@@ -713,7 +709,7 @@ diagnosis.
  with results similar to those in Fig \ref{gr:lmerWorks}.
 
  The baseline BP for the simulated data came from a uniform
- distribution as described in Sec \ref{Sec:LMMMethods} but our
+ distribution as described in Sec \ref{Sec:PrimSim} but our
  model assumed a normal distribution for baseline BP. Our model appears to be robust to the
  normality assumption at baseline.
 
@@ -731,11 +727,11 @@ diagnosis.
 \subsection{Bivariate simulation}
 Fig \ref{gr:BivBias} shows the mean biases in our estimates of the
 carryover parameter from all $7016$ combinations of parameters
-discussed in Sec \ref{Sec:LMMMethods}. For each set of parameters,
+discussed in Sec \ref{Sec:SecoSim}. For each and every set of parameters,
 we conducted 100 bivariate simulated trials, then found the mean of
 the 100 estimates of the carryover parameters. 
 
-The bivariate linear mixed model also appears robust to the normality
+The bivariate mixed effects model also appears robust to the normality
 assumption at baseline as the simulated data came from a uniform
 distribution.
 
@@ -834,7 +830,7 @@ ceased. We tested these confidence intervals for $1$, where the true relative ri
 
 The true relative risk was found by using a sample size of $10^4$ and no error, all other
 parameters were the same as those discussed in Sec
-\ref{Sec:LMMMethods}. As we have no error in the data, we diagnose
+\ref{Sec:PrimSim}. As we have no error in the data, we diagnose
 hypertension when 1 measurement is above the threshold. We found the
 relative risk of incidence hypertension at times when simulated
 carryover was present in the model (i.e. $Z_{it_j} \neq 0$ in Eq
@@ -843,7 +839,7 @@ measurement after treatment ceased. Fig \ref{gr:RelRisk} shows the
 stability around $1$ when carryover is $0$. With increasing magnitudes
 of carryover, no participants in the treatment arm are diagnosed which
 results in a relative risk of $0$. This complicates distinguishing
-magnitudes of carryover which requires further research.
+magnitudes of carryover.
 
 With no carryover in the model, equiprobable diagnosis in
 the treatment and control arms (relative risk of $1$) after treatment
