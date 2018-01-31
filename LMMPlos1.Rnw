@@ -309,12 +309,12 @@ the crossover design, a nominal trend results in more diagnoses in the
 second period which skews estimates. In addition, a three arm trial
 with parallel, crossover, and control arms is also ineffective.
 
-In a rerandomisation design particpants are randomised to treatment
+In a rerandomisation design, particpants are randomised to treatment
 or control at the beginning of the study. After the first period, the
 remaining participants are rerandomised to treatment or control
 \cite{Nason2010}.  Applying this method to TROPHY would require
 investigators rerandomise remaining participants after treatment has
-ceased in the treatment arm, then analyse data. Nason suggests two
+ceased, then analyse data. Nason suggests two
 methods for analysis: mixture models and the Maentel---Haenszel
 estimator.  The mixture model assumes no ``period effect'' \cite{Nason2010}. In our data, there is a non-negligible positive trend which results in higher rates of 
 diagnosis in the second period \cite{Trophies-or-Dreams,
@@ -350,13 +350,12 @@ The rest of this article will discuss analysing resultant data.
 \label{Sec:AnalysingData}
 This approach is difficult due to missing data. After diagnosis
 participants are given open-label treatment which results in
-later measurements being lowered. Because these measurements are lowered, it is impossible to determine if the effect of the initial treatment is extenuated. 
+lower measurements; it is impossible to determine if the effect of the initial treatment is extenuated. 
 
 Because data after diagnosis is missing, estimating carryover parameters using
-a linear model results in biased estimates. However, all data
+a linear model results in biased estimates. Because all data
 after diagnosis is missing deterministically based upon
-previous measurements. As missing data is based on previous
-measurements, the missing data is \textit{missing at random} and a
+previous measurements, the missing data is \textit{missing at random} and a
 mixed effect model should give unbiased estimates of carryover
 parameters.
 
@@ -475,13 +474,15 @@ maximising $\int L d\mathbf{\theta}$ where $\mathbf{\theta} = (\alpha,
  assumed to be diagonal. We optimised the likelihood using the
  \texttt{lmer} function from the \texttt{lme4} package in \texttt{R}.
  
+
+
+\subsection{New Zealand BP data}
+\label{Sec:CorrStr}
 Prior to fitting models, we test their assumptions on data. The assumptions
 for a linear mixed model are: random effects in the data, normality of random
 effects, errors are normal $\epsilon_{it_j} \sim N(\mu = 0, \sigma^2 = \sigma^2)$,
 and uncorrelated errors \cite{verbeke2000linear}. 
 
-\subsection{New Zealand BP data}
-\label{Sec:CorrStr}
 We analysed a large dataset of longitudinal BP from the chronic care management
 programme in Counties Manukau, a suburb of Auckland, New Zealand. Counties Manukau has high Pacific
 Islander and M\=aori population; 34\% of the population lives in
@@ -496,16 +497,12 @@ pressure control'' \cite{AboutTheData}. We obtained $103,098$ repeated
 BP measurements from $9,043$ people.
 
 We explored the correlation structure for people
-who were prehypertensive. We deleted rows with missing systolic measurements or systolic measurements below 50 mm Hg or above 160 mm Hg. The elevated upper
+who were prehypertensive. Because we completed this research prior to November 2017, we used the threshold $140/90$ mm Hg; adjusting the threshold will not alter our findings. We deleted rows with missing systolic measurements or systolic measurements below 50 mm Hg or above 160 mm Hg. The elevated upper
 bound of 160 mm Hg was due to the uncertainty in measurement; systolic
 BP can vary up to 20 mm Hg in any given day \cite{Muntner160}. We
 deleted diastolic measurements less than 30 mm Hg which were likely
 the result of a recording error.  Participants with only 1 measurement
 were also deleted.
-
-Because we completed this research prior to November 2017, we used the threshold $140/90$ mm Hg. Adjusting the threshold will not alter our findings.
-
-%The first two assumptions (random effects in the data and normality of random effect) show that when using linear mixed models, correct specification of the random effects is important. 
 
 \subsection{Normality}
 Fig \ref{Fig:QQPlots} demonstrates a well-documented phenomenon:
@@ -513,7 +510,7 @@ terminal digit preference in BP measurements. Research indicates the
 terminal digit is $0$ in $45\%$ of systolic BP measurements and $48\%$
 of diastolic BP. Even numbers are more likely to occur than odd, with
 the most common odd digit being 5 \cite{DigitPref}. Besides terminal
-digit preference the quantiles of the data appear to follow a normal
+digit preference, the quantiles of the data appear to follow a normal
 distribution.
 
 \begin{figure}
@@ -581,12 +578,6 @@ of simulations.
   \label{Tab.Corr}
 \end{tabular}
 \end{table}
-
- %To find the true relative risk of hypertension from the model, Eq \ref{eq:MixEffM1}, we simulated $10^4$ participants with no measurement error ($ \epsilon_{it_j} = 0$). We paired treatment and control arms to compute the relative risk of hypertension. When no carryover was in the model, at the first time point after treatment ceased, the relative risks were centred around 1. Relative risks of 1 suggests that diagnosis of hypertension is equiprobable in the two arms: because there is no carryover, the effects of treatment cease immediately. With no residual benefits of treatment, diagnosis rates in the two arms are similar.
- 
-%Our tests for carryover involved: simulating data with error; removing data subsequent to diagnosis; fitting a mixed model using \texttt{lmer}; conducting a parameteric bootstrap of the relative risk for the first measurement time after treatment ceased using \texttt{bootMer}; checked to see if 1 is in the confidence interval; if it was, based upon our simulations there is a $99\%$ probability that no carryover was in the model used to simulate the data. The details follow.
-
-
 
 \section{Methods}
 \label{Sec:LMMMethods}
@@ -719,7 +710,7 @@ diagnosis.
 \end{center}
 \caption{Boxplots of mean bias in estimates of carryover parameter for
   the mixed effects model (left panel) and the linear model (right
-  panel) from our primary simuations. Bias in the mixed effects model
+  panel) from our primary simulations. Bias in the mixed effects model
   is consistently smaller.}
 \label{gr:lmerWorks}
 \end{figure}
