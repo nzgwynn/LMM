@@ -515,8 +515,7 @@ distribution.
 \begin{center}
 %\includegraphics[width = 150mm,keepaspectratio]{LMMPlos1-QQPlots.pdf}
 \caption{{\bf Q-Q Plots for both systolic and diastolic blood
-  pressures}Besides terminal digit preference, there is not evidence
-  against normality.}
+  pressures.} Besides terminal digit preference, the straightness of both lines suggests no evidence against normality.}
 \label{Fig:QQPlots}
 \end{center}
 \end{figure}
@@ -539,7 +538,7 @@ among the data.
 \begin{figure}
 \begin{center}
 %\includegraphics[width = 150mm,keepaspectratio]{Means.pdf}
-\caption{{\bf Variogram of systolic and diastolic BP.}The relative flatness of the variogram shows no
+\caption{{\bf Variogram of systolic BP.} The relative flatness of the variogram shows no
   autocorrelation. The vertical line indicates a 4 year lag, which is the
   length of our study.}
 \label{gr:MeanVariogram}
@@ -651,8 +650,7 @@ found in Fig \ref{SchematicBoot}.
 
 \begin{figure}[htp]
   \caption{{\bf Schematic overview of bootstrapping for relative
-    risks.} This method allows us to accurately test a carryover
-    hypothesis. Adapted from \cite{efron1994introduction}.}
+    risks.} We tested our method on all combinations of parameters following this scheme. Adapted from \cite{efron1994introduction}.}
   \label{SchematicBoot}
 \end{figure} 
 
@@ -689,7 +687,7 @@ diagnosis.
 \begin{center}
 %\includegraphics[width = 150mm,keepaspectratio]{LMMPlos1-ModelBias.pdf}
 \end{center}
-\caption{{\bf Mean bias in carryover parameter.}Boxplots of mean bias in estimates of carryover parameter for
+\caption{{\bf Mean bias in carryover parameter.} Boxplots of mean bias in estimates of carryover parameter for
   the mixed effects model (left panel) and the linear model (right
   panel) from our primary simulations. Bias in the mixed effects model
   is consistently smaller.}
@@ -756,7 +754,7 @@ magnitudes of carryover.
 %\includegraphics[width = 150mm,keepaspectratio]{RelRisks1.pdf}
 \caption{{\bf Centre of true relative risks. }Because the true relative risk of hypertension is
   approximately 1 at the first measurement after treatment ceases, when
-  carryover is 0, we test the bootstrap confidence intervals for 1. This test is accurate and achieves our goal. }
+  carryover is 0, we test the bootstrap confidence intervals for 1.}
 \label{gr:RelRisk}
 \end{center}
 \end{figure}
@@ -803,10 +801,6 @@ analysis may provide a solution in these situations.
 
 
 \section*{Supporting information}
-
-
-
-
 
 \clearpage
 \section*{Acknowledgments}
